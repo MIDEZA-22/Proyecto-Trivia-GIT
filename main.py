@@ -14,6 +14,8 @@ puntaje = 0
 iniTrivia = True
 intentos = 0
 
+promedio = 0
+
 #ENCABEZADO
 print(YELLOW + "*************************************************************" + RESET_COLOR)
 print(YELLOW + "*** ¿Qué tanto sabes sobre Historia del Perú y Universal? ***" + RESET_COLOR)
@@ -22,6 +24,8 @@ time.sleep(1)
 print(NEGRITA + RED + "\nINDICACIÓN: Responde las siguientes preguntas escribiendo la letra de la alternativa y presionando 'Enter' para enviar tu respuesta. Ademas, cada respuesta correcta equivale a 1 punto y contarás con varios intentos.\n"+ RESET_COLOR + RESET_NEGRITA)
 time.sleep(3)
 nombre = input("\n¿Cual es tu nombre?: ")
+while not nombre.isalpha():
+  nombre = input("Ingresa tu nombre correctamente: ")
 print("Bienvenido " + GREEN + NEGRITA + f"{nombre.upper()}" + RESET_NEGRITA + RESET_COLOR + ", tienes" + NEGRITA + RED + f" {puntaje} " + RESET_NEGRITA + RESET_COLOR + "puntos\n")
 time.sleep(1)
 
@@ -339,8 +343,8 @@ while iniTrivia == True:
         print(BLUE + "\n|------------------------------------------------------------|" + RESET_COLOR)
         print(BLUE + "|-------------------- RESPUESTA  CORRECTA -------------------|" + RESET_COLOR)
         print(BLUE + "|------------------------------------------------------------|\n" + RESET_COLOR)
-        time.sleep(1)
-
+        time.sleep(1) 
+  
     if puntaje>=0 and puntaje<4:
         print(GREEN + NEGRITA + "\n>>>>>>>> " + f"{nombre.upper()}" + ", OBTUVISTE" + f" {puntaje} PUNTOS = " + RESET_COLOR + RED + "MALO " + RESET_COLOR + GREEN + ">>>>>>>>\n" + RESET_COLOR + RESET_NEGRITA)
         time.sleep(2)
@@ -350,7 +354,10 @@ while iniTrivia == True:
     elif puntaje>7 and puntaje<11:
         print(GREEN + NEGRITA + "\n>>>>>>>> " + f"{nombre.upper()}" + ", OBTUVISTE" + f" {puntaje} PUNTOS = " + RESET_COLOR + BLUE + "EXCELENTE " + RESET_COLOR + GREEN + ">>>>>>>>\n" + RESET_COLOR + RESET_NEGRITA)
         time.sleep(2)
-        
+
+    promedio += puntaje
+    total = promedio/intentos
+  
     print(RED + "\n**********************************************" + RESET_COLOR)
     print(RED + "*** ¿Deseas intentar la trivia nuevamente? ***" + RESET_COLOR)
     print(RED + "**********************************************\n" + RESET_COLOR)
@@ -358,5 +365,6 @@ while iniTrivia == True:
     repTrivia = input("Ingresa 'SI' para repetir, o cualquier tecla para finalizar: ").upper()
 
     if repTrivia != "SI":
-        print(f"\n\nHasta pronto " + GREEN + NEGRITA + f"{nombre.upper()}, " + RESET_NEGRITA + "vuelve pronto!!!...")
+        print("\n\nHasta pronto " + GREEN + NEGRITA + f"{nombre.upper()}, " + RESET_NEGRITA + "en tus " + GREEN + NEGRITA + f"{intentos} " + RESET_NEGRITA + "intentos obtuviste un promedio de: " + GREEN + NEGRITA + f"{round(total,2)} " + RESET_NEGRITA + "puntos")
         iniTrivia = False
+    
